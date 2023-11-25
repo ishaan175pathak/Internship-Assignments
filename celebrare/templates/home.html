@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebare</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        * {
+            font-family: Montserrat, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .logo {
+            color: grey;
+            height: 100%;
+            cursor: pointer;
+            font-family: 'Dancing Script';
+            font-size:  xx-large;
+            font-style: italic;
+        }
+
+        #center{
+            display: flex;
+            margin-left: 45%;
+            padding-top: 6px;
+        }
+    </style>
+
+    <script>
+        function submitFunction(){
+            var fd = new FormData();
+            files = $("#image")[0].files[0]
+            fd.append("image", files)
+
+            $.ajax({
+                url: "/save_data/",
+                type: "post",
+                data: fd,
+                contentType: false, 
+                processData: false, 
+                success: function(data, status){ 
+                    alert("Data Saved Successfully") 
+                }, 
+            });
+        }
+    </script>
+
+</head>
+<body>
+    <div id="center">
+        <div class="logo">
+            Celebare
+        </div>
+    </div>
+    <hr>
+
+    <div id="center">
+        <form>
+            <div class="form-group row">
+                <label for="image" class="col-sm-2 col-form-label">image</label>
+                <div class="col-sm-10">
+                  <input type="file" class="form-control" id="image" placeholder="image">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary mb-2" onclick="submitFunction()">Submit</button>
+            </div>
+        </form>
+    </div>
+        
+    <hr>
+
+</body>
+</html>
