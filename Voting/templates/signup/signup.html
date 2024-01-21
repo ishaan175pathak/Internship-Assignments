@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/static/signup.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="main-div">
+            <div class="signup-div">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group" style="display: flex; justify-content: center;">
+                        <h2>Register Account</h2>
+                    </div>
+                    <div class="form-group">
+                      <label for="emailField">Email address</label>
+                      <input type="email" class="form-control" id="emailField" name="emailField" aria-describedby="emailHelp" placeholder="Enter email">
+                      <small id="emailHelp" class="form-text text-muted" style="color: antiquewhite;">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="passwordField">Password</label>
+                      <input type="password" class="form-control" id="passwordField" name="passwordField" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <ul style="list-style: none;">
+                            <li class="wrong_text"><span>&#10006;</span> First letter should be capital</li>
+                            <li class="wrong_text"><span>&#10006;</span> Should contain a number</li>
+                            <li class="wrong_text"><span>&#10006;</span> length greater then 10</li>
+                        </ul>
+                    </div>
+                    <div class="centered-btn">
+                        <button type="submit" class="btn btn-primary" disabled>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+    </div>
+
+    <script src="{{ STATIC_URL }}/static/signup_script.js"></script>
+</body>
+</html>

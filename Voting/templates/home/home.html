@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polling Page</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/static/mycss.css" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- Navbar section for User with username, options to select categories and logout button -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"> <span>Vote</span> <span>Your</span> <span>Opinion</span></a>
+            </div>
+            
+            <ul class="nav navbar-nav navbar-right">
+            
+            </ul>
+        </div>
+    </nav>
+    <!-- This section is for lists of candidates with a short description about the candidate -->
+    
+    <div class="container">
+        <!-- Row 1 with 3 candidates -->
+        <div class="Row">
+            <div class="thumbnail">
+                <img src="{{ STATIC_URL }}/static/Cars/photo-1542362567-b07e54358753.avif" alt="candidate 1" target="_blank">
+                <span class="caption">
+                    <p>Candidate 1</p>
+                </span>
+            </div>
+            <div class="thumbnail">
+                <img src="{{ STATIC_URL }}/static/Cars/photo-1494976388531-d1058494cdd8.avif" alt="candidate 2" target="_blank">
+                <span class="caption">
+                    <p>candidate 2</p> 
+                </span>
+            </div>
+            <div class="thumbnail">
+                <img src="{{ STATIC_URL }}/static/Cars/photo-1503376780353-7e6692767b70.avif" alt="candidate 3" target="_blank">
+                <span class="caption">
+                    <p>candidate 3</p> 
+                </span>
+            </div>
+        </div>
+        
+        <!-- Row 2 with remaining 3 candidates -->
+        <div class="Row">
+            <div class="thumbnail">
+                <img src="{{ STATIC_URL }}/static/Cars/photo-1525609004556-c46c7d6cf023.avif" alt="candidate 4" target="_blank">
+                <span class="caption">
+                    <p>candidate 4</p> 
+                </span>
+            </div>
+            <div class="thumbnail">
+                <img src="{{ STATIC_URL }}/static/Cars/photo-1541348263662-e068662d82af.avif" alt="candidate 5" target="_blank">
+                <span class="caption">
+                    <p>candidate 5</p> 
+                </span>
+            </div>
+            <div class="thumbnail">
+                <img src="{{ STATIC_URL }}/static/Cars/photo-1605559424843-9e4c228bf1c2.avif" alt="candidate 6" target="_blank">
+                <span class="caption">
+                    <p>candidate 6</p> 
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- creating a modal for user to cast final vote -->
+
+        <div class="vote-modal">
+            <div class="vote-modal-content">
+                <div class="candidate-heading">
+                    <p><span id="candidate-name">candidate name</span> Selected <span class="close">&times;</span></p>
+                </div>
+                <div class="selected-img">
+                    <img src="{{ STATIC_URL }}/static/Cars/photo-1542362567-b07e54358753.avif" alt="candidate 6" target="_blank">
+                </div>
+                <div class="submit-btn">
+                    <form action="../vote/" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="vote" id="vote" hidden>
+                        <button type="submit" class="btn btn-info">Vote</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+    <!-- Creating login modal with blur background -->
+    
+    {% if not user.is_authenticated %}
+        
+        <div class="container">
+            <div class="login-modal">
+                <div class="login-form">
+                    <div class="login-form-header">
+                        <h2>login First</h2>
+                    </div>
+                    <div class="login-form-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="inputEmail">Email address</label>
+                                <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword">Password</label>
+                                <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
+                            </div>
+                            <div class="login-btn">
+                                <button type="submit" class="btn btn-info">Login</button>
+                            </div>
+                            <div class="form-group">
+                                <h4>Doesn't have an account! <a href="signup/">SignUp</a> here</h4>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <script>
+                        
+            var createLogoutFeature = () => {
+            let navbar = document.getElementsByTagName("nav")[0]
+
+            let li = document.createElement("li")
+            let anchor = document.createElement("a")
+            let iconSpan = document.createElement("span")
+            
+            // adding class in the anchor and iconSpan
+
+            iconSpan.classList = "glyphicon glyphicon-log-out"
+            
+            anchor.setAttribute("href", "/logout/")
+            anchor.textContent = "Logout "
+            anchor.appendChild(iconSpan)
+
+            li.appendChild(anchor)
+            navbar.firstElementChild.lastElementChild.append(li)
+        }
+
+        createLogoutFeature()
+
+        </script>
+    {% endif %}
+
+    <script src="{{ STATIC_URL }}/static/scripts.js"></script>
+</body>
+</html>
